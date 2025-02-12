@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        table {
+            margin-top: 100px;
+            width: 300px;
+            text-align: center;
+            background-color: gray;
+            color: white;
+            height: 400px;
+            font-weight: 2000;
+            border-radius: 10px 10px 0 0;
+            font-size: 25px;
+            border: 3px solid gray;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2),
+                0px -4px 8px rgba(0, 0, 0, 0.2),
+                4px 4px 8px rgba(0, 0, 0, 0.2),
+                -4px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        td {
+            background-color: black;
+            box-shadow: 0px 4px 8px white,
+                0px -4px 8px white,
+                4px 4px 8px white,
+                -4px 4px 8px white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <table border="1" cellspacing="5" cellpadding="10" align="center">
+        <tr id="screen" style="color: white; height: 50px;">
+            <td id="result" colspan="4" style="color: white; height: 50px;"></td>
+        </tr>
+        <tr>
+            <td onclick="appendValue('1')">1</td>
+            <td onclick="appendValue('2')">2</td>
+            <td onclick="appendValue('3')">3</td>
+            <td onclick="appendValue('+')">+</td>
+        </tr>
+        <tr>
+            <td onclick="appendValue('4')">4</td>
+            <td onclick="appendValue('5')">5</td>
+            <td onclick="appendValue('6')">6</td>
+            <td onclick="appendValue('-')">-</td>
+        </tr>
+        <tr>
+            <td onclick="appendValue('7')">7</td>
+            <td onclick="appendValue('8')">8</td>
+            <td onclick="appendValue('9')">9</td>
+            <td onclick="appendValue('*')">*</td>
+        </tr>
+        <tr>
+            <td onclick="calculateResult()">=</td>
+            <td onclick="appendValue('0')">0</td>
+            <td onclick="appendValue('.')">.</td>
+            <td onclick="appendValue('/')">/</td>
+        </tr>
+    </table>
+    <script>
+        function appendValue(value) {
+            document.getElementById("result").innerText += value;
+        }
+        function calculateResult() {
+            try {
+                document.getElementById("result").innerText = eval(document.getElementById("result").innerText);
+            } catch {
+                document.getElementById("result").innerText = "Error";
+            }
+        }
+    </script>
+</body>
+</html>

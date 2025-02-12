@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Application</title>
+    <style>
+        body {
+            margin: auto;
+            padding: 0;
+            background-color: gray;
+        }
+
+        div {
+            background-color: white;
+            border: 2px solid black;
+            margin: 200px;
+            padding: 50px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px white,
+                0px -4px 8px white,
+                4px 4px 8px white,
+                -4px 4px 8px white;
+        }
+
+        h1 {
+            border: 2px solid gray;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2),
+                0px -4px 8px rgba(0, 0, 0, 0.2),
+                4px 4px 8px rgba(0, 0, 0, 0.2),
+                -4px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-transform: uppercase;
+        }
+
+        button {
+            border: 1px solid black;
+            background-color: blue;
+            color: white;
+            font-weight: 1000;
+            text-align: center;
+            font-size: 25px;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        function Increment() {
+            var num = document.getElementById("data");  
+            var value = parseInt(num.innerHTML);
+            if(value == 10){
+                num.innerHTML=10;
+                alert("Number Can Not Increment After 10")
+            }else{
+            var inc = value + 1; 
+            num.innerHTML = inc; 
+            }
+         
+        }
+        function Decrement(){
+            var num = document.getElementById("data");
+            var value=parseInt(num.innerHTML);
+            if(value <= 0){
+                num.innerHTML=0;
+                alert("Number Cannot Decrement After 0")
+            }
+            else{
+            var dec= value - 1;
+            
+            num.innerHTML =dec;
+            }
+           
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <div>
+        <h2>Counter Program</h2>
+        <h1 id="data" value="0">0</h1>
+        <button type="button" onclick="Increment()">Increment</button>
+        <button type="button" onclick="Decrement()">Decrement</button>
+    </div>
+
+</body>
+
+</html>

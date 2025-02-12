@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Form with Table</title>
+    <style>
+        /* Basic styling */
+        div {
+            width: 500px;
+            padding: 20px;
+            margin: 50px auto;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: blue;
+            color: white;
+            font-size: 16px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 190px;
+        }
+        button:hover {
+            background-color: darkblue;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+  
+    <div>
+        <form id="dataForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+            <br/> <br/> <br/>
+            <label for="number">Mobile Number:</label>
+            <input type="number" id="number" placeholder="Enter mobile number" required>
+            <br/> <br/> <br/>
+
+            <label>Gender:</label>
+            <div style="display: flex; width: 70%; margin-top: -20px;">
+            Male:<input type="radio" name="gender" value="Male" required>
+            Female:<input type="radio" name="gender" value="Female" required> 
+        </div>
+       
+            
+            <label for="city">City:</label>
+            <select id="city" required>
+                <option value="Ahmdabad">Ahmdabad</option>
+                <option value="Rajkot">Rajkot</option>
+                <option value="Surat">Surat</option>
+            </select>
+            <br/><br/>
+            
+            <button type="button" onclick="addData()">Submit Data</button>
+        </form>
+    </div>
+
+<!-- to display in html body -->
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Mobile No</th>
+                <th>Gender</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        function addData() {
+           let name = document.getElementById("name").value;
+            let number = document.getElementById("number").value;
+            let gender = document.querySelector('input[name="gender"]:checked') ? document.querySelector('input[name="gender"]:checked').value : '';
+            let city = document.getElementById("city").value;
+
+            
+            if (!name || !number || !gender || !city) {
+                alert("Please fill in all fields!");
+                return;
+            }
+
+          
+            let table = document.getElementById("dataTable").getElementsByTagName("tbody")[0];
+            let newRow = table.insertRow();
+
+           
+            let cell1 = newRow.insertCell(0);
+            let cell2 = newRow.insertCell(1);
+            let cell3 = newRow.insertCell(2);
+            let cell4 = newRow.insertCell(3);
+
+            cell1.textContent = name;
+            cell2.textContent = number;
+            cell3.textContent = gender;
+            cell4.textContent = city;
+
+          
+            document.getElementById("dataForm").reset();
+        }
+    </script>
+
+</body>
+</html>

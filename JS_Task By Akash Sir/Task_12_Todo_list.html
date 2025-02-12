@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <style>
+        .main {
+            border: 1px solid black;
+            margin: 200px;
+            padding: 40px;
+            background-color: blanchedalmond;
+            width: 600px;
+            height: auto;
+        }
+
+        input {
+            width: 50%;
+            height: 30px;
+            background-color: azure;
+            color: black;
+            outline: 2px double dodgerblue;
+            border: 1px solid black;
+            border-radius: 0px 10px 0 10px;
+        }
+
+        button {
+            background-color: dodgerblue;
+            color: white;
+            margin: 20px;
+            font-size: 20px;
+            font-weight: 500;
+            outline: 2px solid black;
+            border: 1px double azure;
+            border-radius: 10px;
+        }
+
+        .task-list {
+            margin-top: 20px;
+        }
+
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .task-item button {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <input type="text" id="do" placeholder="Enter Your Task" />
+        <button id="addTaskButton">ADD TASK</button>
+
+        <div class="task-list" id="taskList"></div>
+    </div>
+
+    <script>
+        // Get references to elements
+        const inputField = document.getElementById('do');
+        const addTaskButton = document.getElementById('addTaskButton');
+        const taskList = document.getElementById('taskList');
+
+        // Event listener for adding a task
+        addTaskButton.addEventListener('click', function() {
+            const taskValue = inputField.value.trim();
+
+            if (taskValue === "") {
+                alert("Please enter a task.");
+                return;
+            }
+
+            // Create a new task element
+            const taskItem = document.createElement('div');
+            taskItem.classList.add('task-item');
+
+            // Create a paragraph for the task text
+            const taskText = document.createElement('p');
+            taskText.innerText = taskValue;
+
+            // Create the edit button
+            const editButton = document.createElement('button');
+            editButton.innerText = 'Edit';
+            editButton.addEventListener('click', function() {
+                const newTask = prompt("Edit your task:", taskText.innerText);
+                if (newTask) {
+                    taskText.innerText = newTask;
+                }
+            });
+
+            // Create the delete button
+            const deleteButton = document.createElement('button');
+            deleteButton.innerText = 'Delete';
+            deleteButton.addEventListener('click', function() {
+                taskList.removeChild(taskItem);
+            });
+
+            // Append task text and buttons to task item
+            taskItem.appendChild(taskText);
+            taskItem.appendChild(editButton);
+            taskItem.appendChild(deleteButton);
+
+            // Add the task item to the list
+            taskList.appendChild(taskItem);
+
+            // Clear the input field after adding the task
+            inputField.value = '';
+        });
+    </script>
+</body>
+
+</html>

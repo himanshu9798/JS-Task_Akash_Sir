@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main {
+            width: 500px;
+            padding: 20px;
+            margin-left: 450px;
+            margin-top: 100px;
+            font-size: 20px;
+            font-weight: 1000;
+            border-radius: 8px;
+
+
+            text-align: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2),
+                0px -4px 8px rgba(0, 0, 0, 0.2),
+                4px 4px 8px rgba(0, 0, 0, 0.2),
+                -4px 4px 8px rgba(0, 0, 0, 0.2);
+
+        }
+
+        button {
+            border: 1px solid black;
+            background-color: rgb(140, 140, 236);
+            color: white;
+            font-weight: 1000;
+            text-align: center;
+            font-size: 25px;
+            border-radius: 5px;
+        }
+
+       
+
+        select {
+            font-weight: 1000;
+            text-align: center;
+
+            border-radius: 5px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <h1>GST CALCULATOR</h1>
+        <label>Enter Amount(inINR):</label>
+        <input type="text" id="amnt" />
+        <br />
+        <br />
+        <label>Select GST Rate:</label>
+        <select id="gst" name="gst_cal">
+            <option value="5">5%</option>
+            <option value="12">12%</option>
+            <option value="18">18%</option>
+            <option value="24">24%</option>
+            <option value="30">24%</option>
+        </select>
+        <br />
+        <br />
+        <button type="button" onclick="Calculate()">Calculate GST</button>
+        <p id="price"></p>
+        <p id="gst_show"></p>
+        <p id ="result"></p>
+    </div>
+</body>
+<script>
+    function Calculate() {
+        let unt=document.getElementById("amnt").value;
+        let ammount=parseFloat(unt);
+        if (isNaN(ammount) || ammount <= 0) {
+        alert("Please Enter a valid amount or greater than 0");
+        return; 
+    }
+        let prc=document.getElementById('price')
+        prc.innerHTML=`Ammount  ₹: ${ammount}.00`;
+        let perce=document.getElementById("gst").value;
+        let perc=parseFloat(perce);
+        let show=document.getElementById("gst_show")
+        let gstAmount = parseFloat((perc / 100) * ammount); // Calculateing gst amount
+        show.innerHTML=`GST( ${perc}%)= ₹:${gstAmount} `;
+        let res=document.getElementById("result")
+       
+        let totalAmount = ammount - gstAmount; //  amount calculating  including gst
+        res.innerHTML=`Total ${parseFloat(totalAmount)}`
+
+
+
+    }
+</script>
+
+</html>

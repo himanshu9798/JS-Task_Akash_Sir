@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            border: 3px solid black;
+            outline: 2px solid gray;
+            padding: 40px;
+            margin-left: 450px;
+            margin-top: 200px;
+            width: 400px;
+            align-content: center;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 800;
+          
+            
+
+        }
+
+    </style>
+    <script>
+        function chnageColor() {
+            let first = document.getElementById("range1").value;
+            let second = document.getElementById("range2").value;
+            let three = document.getElementById("range3").value;
+            // console.log("data1",first,second,three)
+            let main_color = `rgb(${first},${second},${three})`;
+            console.log(main_color + "data");
+            let color = document.getElementById("main")
+            color.style.backgroundColor = main_color;
+            document.getElementById("points").innerHTML = main_color;
+            if(main_color=="rgb(255,255,255)"){
+                color.style.color="black"
+
+            } else{
+                color.style.color="white";
+            }
+
+
+
+        }
+
+    </script>
+</head>
+
+<body>
+    <div id="main">
+        R: <input type="range" id="range1" min="0" max="255" onchange="chnageColor()" />
+        <br />
+
+        G: <input type="range" id="range2" min="0" max="255" onchange="chnageColor()" />
+        <br />
+
+        B: <input type="range" id="range3" min="0" max="255" onchange="chnageColor()" />
+        <br />
+        <p id="points"></p>
+
+    </div>
+
+</body>
+
+</html>
