@@ -61,13 +61,73 @@
     </div>
 
     <script>
-        // Get references to elements
+
         const inputField = document.getElementById('do');
         const addTaskButton = document.getElementById('addTaskButton');
         const taskList = document.getElementById('taskList');
 
-        // Event listener for adding a task
-        addTaskButton.addEventListener('click', function() {
+
+        function loadTasks() {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.forEach(task => {
+                createTaskElement(task);
+            });
+        }
+
+        //  creating a new task element
+        function createTaskElement(taskValue) {
+
+            const taskItem = document.createElement('div');
+            taskItem.classList.add('task-item');
+
+            // create a p tag
+            const taskText = document.createElement('p');
+            taskText.innerText = taskValue;
+
+            // create the edit button
+            const editButton = document.createElement('button');
+            editButton.innerText = 'Edit';
+            editButton.addEventListener('click', function () {
+                const newTask = prompt("Edit your task:", taskText.innerText);
+                if (newTask) {
+                    taskText.innerText = newTask;
+                    updateTaskInStorage();
+                }
+            });
+
+            // creating delete button
+            const deleteButton = document.createElement('button');
+            deleteButton.innerText = 'Delete';
+            deleteButton.addEventListener('click', function () {
+                taskList.removeChild(taskItem);
+                removeTaskFromStorage(taskValue);
+            });
+
+            // adding task text and buttons to task item
+            taskItem.appendChild(taskText);
+            taskItem.appendChild(editButton);
+            taskItem.appendChild(deleteButton);
+
+            // adding the task
+            taskList.appendChild(taskItem);
+        }
+
+        // remove tasks to storage
+        function saveTaskToStorage(taskValue) {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.push(taskValue);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        // remove task from storage
+        function removeTaskFromStorage(taskValue) {
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks = tasks.filter(task => task !== taskValue);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        //  for adding a task
+        addTaskButton.addEventListener('click', function () {
             const taskValue = inputField.value.trim();
 
             if (taskValue === "") {
@@ -75,42 +135,18 @@
                 return;
             }
 
-            // Create a new task element
-            const taskItem = document.createElement('div');
-            taskItem.classList.add('task-item');
+            // creating the task and save in list
+            createTaskElement(taskValue);
 
-            // Create a paragraph for the task text
-            const taskText = document.createElement('p');
-            taskText.innerText = taskValue;
+            // save  the task in localstorage
+            saveTaskToStorage(taskValue);
 
-            // Create the edit button
-            const editButton = document.createElement('button');
-            editButton.innerText = 'Edit';
-            editButton.addEventListener('click', function() {
-                const newTask = prompt("Edit your task:", taskText.innerText);
-                if (newTask) {
-                    taskText.innerText = newTask;
-                }
-            });
-
-            // Create the delete button
-            const deleteButton = document.createElement('button');
-            deleteButton.innerText = 'Delete';
-            deleteButton.addEventListener('click', function() {
-                taskList.removeChild(taskItem);
-            });
-
-            // Append task text and buttons to task item
-            taskItem.appendChild(taskText);
-            taskItem.appendChild(editButton);
-            taskItem.appendChild(deleteButton);
-
-            // Add the task item to the list
-            taskList.appendChild(taskItem);
-
-            // Clear the input field after adding the task
+            // to clear the input tag after ask is adding
             inputField.value = '';
         });
+
+        // load the task from localstorzge
+        loadTasks();
     </script>
 </body>
 
